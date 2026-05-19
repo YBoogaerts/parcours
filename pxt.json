@@ -4,12 +4,14 @@
     "dependencies": {
         "core": "*",
         "radio": "*",
-        "microphone": "*"
+        "microphone": "*",
+        "protocole_microNet": "github:YBoogaerts/protocole_micronet#master"
     },
     "files": [
         "main.blocks",
         "main.ts",
-        "README.md"
+        "README.md",
+        "parcours.ts"
     ],
     "testFiles": [
         "test.ts"
@@ -21,5 +23,5 @@
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "blocksprj"
+    "preferredEditor": "tsprj"
 }

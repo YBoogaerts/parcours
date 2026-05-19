@@ -43,6 +43,7 @@ namespace Parcours {
         let serialid = radio.receivedPacket(RadioPacketProperty.SerialNumber)
         // numéro d'utilisateur
         let userId = userIdList.indexOf(serialid)
+        
 
         // inscription de la carte
         if (userId < 0) {
@@ -51,6 +52,8 @@ namespace Parcours {
             userStateList.push(0)
             userId = userIdList.indexOf(serialid)
         }
+
+        basic.showNumber(userId)
         // inscription du participant
         if (microNet.recipientPart(message) === getName() && microNet.bodyPart(message) === "INS") {
             if (inscription(microNet.senderPart(message), userId)) {

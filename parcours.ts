@@ -17,7 +17,7 @@ namespace Parcours {
         }
     }
 
-    //% block= "nom du joueur %id"
+    //% block="nom du joueur %id"
     export function getUserName(id:number){
         return userList[id]
     }

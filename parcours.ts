@@ -9,7 +9,12 @@ namespace Parcours {
 
     //% block="envoyer le message $receivedString au parcours"
     export function onReceiveString(receivedString: string) {
-        multiGroup.receiveMessage(receivedString)
+        serial.writeLine("onReceiveString("+receivedString+")")
+        if(multiGroup.groupOf(receivedString) == multiGroup.noGroup()){
+            receiveNoGroupMessage(multiGroup.messagePart(receivedString))
+        }else{
+            receiveMessage(multiGroup.messagePart(receivedString))
+        }
     }
 
 
@@ -72,8 +77,8 @@ namespace Parcours {
             if (stateRadioActionList[state]) {
                 stateRadioActionList[state](userId, message)
             }
+            send(userId, userId, "NIV", userStateList[userId].toString())
         }
-        send(userId, userId, "NIV", userStateList[userId].toString())
 
     }
 

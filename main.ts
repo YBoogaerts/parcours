@@ -1,3 +1,8 @@
+function etape0 (message: string, num: number) {
+    if (message.substr(8) == "++") {
+        Parcours.nextState(num, 1)
+    }
+}
 input.onButtonPressed(Button.A, function () {
     radio.sendNumber(control.deviceSerialNumber())
 })
@@ -10,6 +15,9 @@ input.onButtonPressed(Button.B, function () {
 radio.setTransmitSerialNumber(true)
 radio.setGroup(1)
 Parcours.setName("loup")
+Parcours.setRadioAction(0, function (id, message) {
+    etape0(message, id)
+})
 basic.forever(function () {
 	
 })

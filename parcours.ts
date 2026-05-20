@@ -52,8 +52,7 @@ namespace Parcours {
             userStateList.push(0)
             userId = userIdList.indexOf(serialid)
         }
-
-        basic.showNumber(userId)
+//        serial.writeLine(microNet.recipientPart(message) +" === "+getName()+" && "+microNet.bodyPart(message)+" === INS")
         // inscription du participant
         if (microNet.recipientPart(message) === getName() && microNet.bodyPart(message) === "INS") {
             if (inscription(microNet.senderPart(message), userId)) {
@@ -68,24 +67,20 @@ namespace Parcours {
         let serialid = radio.receivedPacket(RadioPacketProperty.SerialNumber)
         // numéro d'utilisateur
         let userId = userIdList.indexOf(serialid)
-
-
-        serial.writeLine("receiveMessage(" + message + ")")
-
-
-
         if (userId >= 0) {
             let state = userStateList[userId]
             if (stateRadioActionList[state]) {
                 stateRadioActionList[state](userId, message)
             }
         }
+        send(userId, userId, "NIV", userStateList[userId].toString())
 
     }
 
     function send(group: number, userid: number, instruction: string, data: string) {
         pause(400)
         let message = multiGroup.buildMessage(group, microNet.buildMessage(instruction + data, userList[userid]))
+        serial.writeLine("send("+message+")")
         radio.sendString(message)
     }
 
@@ -102,6 +97,7 @@ namespace Parcours {
         if (valid) {
             userList[id] = nom;
         }
+        //serial.writeLine("inscription("+nom+", "+id +"):"+valid)
         return valid
     }
 

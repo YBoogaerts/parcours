@@ -90,6 +90,11 @@ namespace Parcours {
         radio.sendString(message)
     }
 
+    //% block
+    export function sendToGroup(group:number, texte: string){
+        radio.sendString(multiGroup.buildMessage(group,texte))
+    }
+
     
     export function inscription(nom: string, id: number): boolean {
         let valid = nom.length === 4 && nom != microNet.getnoBody();

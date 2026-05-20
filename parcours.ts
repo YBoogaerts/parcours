@@ -17,13 +17,14 @@ namespace Parcours {
         }
     }
 
-
+    //% block= "nom du joueur %id"
+    export function getUserName(id:number){
+        return userList[id]
+    }
     //% block="Le nom du parcours est %name"
     export function setName(name: string) {
         microNet.setName((name + "....").substr(0, 4));
-        multiGroup.setGlobalReceiver(receiveNoGroupMessage);
-        multiGroup.setGroupReceiver(receiveMessage);
-    }
+     }
 
     //% block="nom du parcours"
     export function getName(): string {
@@ -89,7 +90,7 @@ namespace Parcours {
         radio.sendString(message)
     }
 
-    //% block="définir nom[$id] = $nom"
+    
     export function inscription(nom: string, id: number): boolean {
         let valid = nom.length === 4 && nom != microNet.getnoBody();
         for (let index = 0; valid && index < 4; index++) {
